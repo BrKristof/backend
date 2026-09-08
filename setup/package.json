@@ -1,0 +1,36 @@
+{
+  "name": "13c_1csop_backend_2026_27",
+  "version": "1.0.0",
+  "main": "./lib/index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "tsc",
+    "lint": "tslint -c tslint.json src/**/*.ts",
+    "prepublish": "npm run build"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/szilasii/13c_1csop_Backend_2026_27.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/szilasii/13c_1csop_Backend_2026_27/issues"
+  },
+  "homepage": "https://github.com/szilasii/13c_1csop_Backend_2026_27#readme",
+  "dependencies": {
+    "tsc": "^2.0.4",
+    "tslint": "^5.20.1",
+    "typescript": "^7.0.2"
+  },
+  "description": "",
+  "files": [
+    "./bin/*",
+    "./lib/*"
+  ],
+  "typings": "./lib/index.d.ts",
+  "devDependencies": {
+    "nodemon": "^3.1.14",
+    "ts-node": "^10.9.2"
+  }
+}
