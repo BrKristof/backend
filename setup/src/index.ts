@@ -1,6 +1,5 @@
-
 export function sayHelloWorld(world: string) {
   return `Hello ${world}`;
 }
 
-console.log(sayHelloWorld("world"))
+console.log(sayHelloWorld("World"));

@@ -1,7 +1,7 @@
 {
 	"compilerOptions": {
 		"target": "es6",
-		"module": "node16",
+		"module": "nodenext",
 		"moduleResolution": "nodenext",
 		"lib": [
 			"es2015"
@@ -26,7 +26,7 @@
 
 		"emitDecoratorMetadata": true,
 		"experimentalDecorators": true,
-		//"downlevelIteration": true,
+	//	"downlevelIteration": true,
 		"declaration": true,
 
 		"pretty": true
