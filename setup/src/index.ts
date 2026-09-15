@@ -286,3 +286,32 @@ class AdminUser extends D{
 
 const us = new D('chi',21,"chichi","admin")
 const aus = new AdminUser('chi',21,"chichi")
+
+//abstract class
+//speciális osztály aminek célja hogy belőluk származtassunk osztályokat
+//nem lehet példányosítani őket
+//előregyártott sablonoknak is lehet őket tekinteni
+
+function identitas<T>(arg: T):T{
+  return arg
+}
+
+const result1 = identitas<string>("hello ts")
+const result2 = identitas<number>(43)
+
+function getFirtItem<T>(arr: T[]):T | undefined{
+  return arr[0]
+}
+
+const n = [1,2,5]
+const ns = ['yes']
+const firstNumber = getFirtItem<number>(n)
+const firstName = getFirtItem<string>(ns)
+
+//////////////
+
+interface IApiResponse<T> {
+  status: number,
+  message?: string,
+  data: T
+}
