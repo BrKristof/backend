@@ -178,3 +178,111 @@ console.log(dolgozo1)
 
 //////////////////////////////////////////////
 
+function osszead(a: number, b:number):number{
+  return a + b
+}
+
+function kiir(uzenet :string):void{
+  console.log(uzenet)
+}
+
+function ujFelhasznalo(neve:string,eletkor:number): void{
+  console.log({neve,eletkor})
+}
+
+function udvozol(neve:string,megszolitas?:string):void{
+  if(megszolitas){
+    console.log(`Szia ${megszolitas} ${neve}`)
+  }
+  else{
+    console.log(`Szia ${neve}`)
+  }
+  
+}
+
+function udvozol2(neve:string = "vendeg",megszolitas?:string):string{
+  if(megszolitas){
+    return console.log(`Szia ${megszolitas} ${neve}`)
+  }
+  return console.log(`Szia ${neve}`)
+
+  
+}
+
+const osszeg = (a:number, b:number):number => {return a+b}
+const osszeg2 = (a:number, b:number):number =>  a+b
+
+//////////////////////////////////
+
+type Fh = {name:string,age:number,active:boolean}
+interface IFh {
+  name: "john",
+  age:34,
+  active:true
+}
+
+
+const fh: IFh = {
+  name: "john",
+  age:34,
+  active:true
+}
+
+const value: unknown = 30
+
+const strValue:string  =value as string //átkonvertálja stringgé
+const strValue2:string  = <string>value //elvileg ugyanaz mint az elozo
+
+
+console.log(strValue*30)
+console.log(strValue.toUpperCase())
+
+interface IDolgozo extends IFh{
+  munkakor: string
+}
+
+const dolgozo: IDolgozo = {
+  name: "John",
+  age: 19,
+  active:true,
+  munkakor:"fejleszto"
+}
+
+/////////////////////////////////////////////////////////////////////
+class D {
+  public name:string;
+  public readonly age:number;
+  private password:string
+  protected role: string // az osztályban és annak leszármazottaiban használhatjuk
+
+  constructor(name:string, age:number,password:string,role:string){
+    this.name = name
+    this.age = age
+    this.password = password
+    this.role = role
+  }
+
+  greet(){
+    return `hello my name is ${this.name} and im ${age} years old`
+  }
+  introduce(){
+    return `hello my name is ${this.name}. yoroshiku`
+  }
+}
+
+class AdminUser extends D{
+  constructor(name:string, age:number,password:string){
+    super(name,age,password,"admin")
+  }
+
+  getPassword(){
+    return this.password //hibat dob mivel ez a D osztály privát mezeje és nem érhető el meg a gyerek osztályban sem, ha megis elakarjuk érni akkor protected-e kell tenni
+  }
+
+  getRole(){
+    return this.role
+  }
+}
+
+const us = new D('chi',21,"chichi","admin")
+const aus = new AdminUser('chi',21,"chichi")
