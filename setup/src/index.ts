@@ -315,3 +315,83 @@ interface IApiResponse<T> {
   message?: string,
   data: T
 }
+
+interface IUser {
+  id:string;
+  name:string;
+  email:string;
+  avatarUrl?: string;
+  createAt:Date;
+  updateAt:Date
+}
+
+const apiResponse: IApiResponse<IUser> = {
+  status: 200,
+  message: 'user fetched succesfully',
+  data: {
+    id:'12345',
+    name:'fsdfsd',
+    email: "sahksd@gmail.com",
+    createAt: new Date(),
+    updateAt: new Date()
+  }
+}
+
+//ezzel tudom egy osztaly részét tudod használni
+/*const updateUser: Partial<IUser> = {
+  name:"john doe"
+}*/
+
+//minden értéket meg kell adni 
+/*const updateUser: Required<IUser> = {
+  id:"1245",
+  name:'jh',
+  email:"fds",
+  createAt: new Date(),
+  updateAt: new Date()
+}*/
+
+/*const updateUser: Pick<IUser, 'id'|'name'> = {
+  id: "642324",
+  name: "done"
+}*/
+
+//itt azt választjuk ki mit kell kihagyni
+/*const updateUser: Omit<IUser, 'id' | 'name'> = {
+  email:"fds",
+  createAt: new Date(),
+  updateAt: new Date()
+}*/ 
+
+const updateUser: IUser = {
+  id:"1245",
+  name:'jh',
+  email:"fds",
+  createAt: new Date(),
+  updateAt: new Date()
+}
+console.log(updateUser)
+
+type UserKey = keyof IUser
+const field = 'name'
+const key  = field as UserKey
+
+console.log(updateUser[key])
+
+///////////////////////////////////
+
+const kocka = {a:20, b:10}
+type Kocka = typeof kocka
+
+const kocka2: Kocka = {a:30, b:40}
+console.log(kocka2)
+
+if(updateUser.name !== null) {
+  console.log(updateUser.name.toUpperCase())
+}
+
+const name__ = updateUser?.avatarUrl ?? "ismeretlen"
+
+///////////////////////////////////
+
+
