@@ -1,0 +1,26 @@
+npm + nodejs telepitese
+majd terminalba npm init typescript
+npm i -D nodemon            dev dependency letoltes
+npm i -D tsc
+tsc ./src/index.ts
+npx tsx ./src/index.ts      ezzel is futtathato a ts
+node ./src/index.ts
+
+terminalbol is lehet commitolni
+nodejs legfrissebb verzio kell
+
+npm: node csomagkezelo
+npx: valamilyen modullal lefuttathato
+node: sima futtatas
+
+package.jsonba a scripts koze lehet ilyeneket
+"dev": "nodemon --exec node ./src/index.ts"
+
+es ha utana a terminalba: npm run dev
+akkor lefut az index.ts es real time updatel
+
+clonozas utan: npm i (ha nincs node_modules)
+
+
+npm i -g typescript     globalisan letolti a typescriptet, ha nincs net akkor is le lehet tolteni utana
+npx tsc --init          letrehozza a tsconfigot
