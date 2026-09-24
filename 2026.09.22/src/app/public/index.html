@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="hu">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Termékek</title>
+    <style>
+        body { font-family: system-ui, sans-serif; background: #f4f5f7; color: #222; margin: 0; padding: 24px; }
+        h1 { margin-top: 0; }
+        .controls { display: flex; gap: 12px; flex-wrap: wrap; margin-bottom: 8px; }
+        .controls input, .controls select { padding: 8px 10px; font-size: 15px; border: 1px solid #ccc; border-radius: 6px; }
+        .controls input { flex: 1; min-width: 200px; }
+        #status { color: #666; margin: 8px 0 16px; }
+        #products { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 16px; }
+        .card { background: #fff; border-radius: 10px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,.1); display: flex; flex-direction: column; }
+        .card h2 { font-size: 17px; margin: 6px 0 2px; }
+        .category { font-size: 12px; color: #2563eb; text-transform: uppercase; letter-spacing: .05em; }
+        .brand { color: #666; margin: 0 0 8px; font-size: 14px; }
+        .description { flex: 1; font-size: 14px; line-height: 1.4; margin: 0 0 12px; }
+        .footer { display: flex; justify-content: space-between; align-items: baseline; }
+        .price { font-size: 16px; }
+        .meta { font-size: 13px; color: #666; }
+        .card button { margin-top: 12px; }
+        #edit-form { background: #fff; border-radius: 10px; padding: 16px; box-shadow: 0 1px 3px rgba(0,0,0,.1); margin-bottom: 24px; }
+        #edit-form h2 { margin-top: 0; font-size: 18px; }
+        .fields { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; }
+        .fields label { display: flex; flex-direction: column; gap: 4px; font-size: 13px; color: #555; }
+        .fields label.wide { grid-column: 1 / -1; }
+        .fields label.checkbox { flex-direction: row; align-items: center; }
+        .fields input, .fields select, .fields textarea { padding: 8px 10px; font-size: 15px; border: 1px solid #ccc; border-radius: 6px; font-family: inherit; }
+        .actions { display: flex; gap: 12px; align-items: center; margin-top: 16px; }
+        button { padding: 8px 14px; font-size: 15px; border: none; border-radius: 6px; background: #2563eb; color: #fff; cursor: pointer; }
+        button[type="reset"] { background: #e5e7eb; color: #222; }
+        button:disabled { opacity: .5; cursor: default; }
+        #form-status.error { color: #b91c1c; }
+        #form-status.success { color: #15803d; }
+    </style>
+</head>
+<body>
+    <h1>Termékek</h1>
+
+    <form id="edit-form">
+        <h2>Termék módosítása</h2>
+        <div class="fields">
+            <label class="wide">Termék
+                <select id="product-select" name="id" required>
+                    <option value="">Válassz terméket...</option>
+                </select>
+            </label>
+            <label>Név
+                <input name="name" type="text" required>
+            </label>
+            <label>Kategória
+                <input name="category" type="text" required>
+            </label>
+            <label>Márka
+                <input name="brand" type="text" required>
+            </label>
+            <label>Ár
+                <input name="price" type="number" min="0" step="1" required>
+            </label>
+            <label>Pénznem
+                <select name="currency">
+                    <option value="HUF">HUF</option>
+                    <option value="EUR">EUR</option>
+                    <option value="USD">USD</option>
+                </select>
+            </label>
+            <label>Készlet (db)
+                <input name="stock" type="number" min="0" step="1" required>
+            </label>
+            <label>Értékelés
+                <input name="rating" type="number" min="0" max="5" step="0.1" required>
+            </label>
+            <label>Kép fájlneve
+                <input name="image" type="text">
+            </label>
+            <label class="checkbox">
+                <input name="active" type="checkbox"> Aktív
+            </label>
+            <label class="wide">Leírás
+                <textarea name="description" rows="3"></textarea>
+            </label>
+        </div>
+        <div class="actions">
+            <button type="submit">Mentés</button>
+            <button type="reset">Visszaállítás</button>
+            <span id="form-status"></span>
+        </div>
+    </form>
+
+    <div class="controls">
+        <input id="search" type="search" placeholder="Keresés név vagy márka alapján...">
+        <select id="category">
+            <option value="">Összes kategória</option>
+        </select>
+    </div>
+    <p id="status"></p>
+    <main id="products"></main>
+
+    <script src="front.js"></script>
+</body>
+</html>
