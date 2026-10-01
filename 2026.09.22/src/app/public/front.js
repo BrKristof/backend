@@ -10,8 +10,10 @@ const productSelect = document.getElementById("product-select")
 const formStatus = document.getElementById("form-status")
 const saveButton = editForm.querySelector('button[type="submit"]')
 
+// a szervertől letöltött termékek listája
 let products = []
 
+// letölti a termékeket a szerverről, majd feltölti a legördülő listákat és kirajzolja a kártyákat
 async function loadProducts() {
     statusElement.textContent = "Betöltés..."
     try {
@@ -28,6 +30,7 @@ async function loadProducts() {
     }
 }
 
+// a termékekből kigyűjti az egyedi kategóriákat (Set) és betölti őket a kategória szűrőbe
 function fillCategories() {
     const selectedCategory = categorySelect.value
     const categories = [...new Set(products.map(p => p.category))]
@@ -42,10 +45,12 @@ function fillCategories() {
     categorySelect.value = categories.includes(selectedCategory) ? selectedCategory : ""
 }
 
+// az árat magyar formátumban, pénznemmel jeleníti meg
 function formatPrice(price, currency) {
     return new Intl.NumberFormat("hu-HU", { style: "currency", currency, maximumFractionDigits: 0 }).format(price)
 }
 
+// a keresés és a kategória alapján szűri a termékeket, és mindegyikhez kártyát készít
 function render() {
     const search = searchInput.value.trim().toLowerCase()
     const category = categorySelect.value
@@ -86,6 +91,7 @@ function render() {
 
 // ---------- Szerkesztő űrlap ----------
 
+// a szerkesztő űrlap termékválasztó listáját tölti fel
 function fillProductSelect() {
     const selectedId = productSelect.value
     productSelect.length = 1 // az első "Válassz terméket..." opció marad
@@ -98,6 +104,7 @@ function fillProductSelect() {
     productSelect.value = selectedId
 }
 
+// visszaadja a termékválasztóban kiválasztott terméket (a select értéke szöveg, ezért Number)
 function getSelectedProduct() {
     return products.find(p => p.id === Number(productSelect.value))
 }
@@ -135,11 +142,13 @@ function readForm() {
     }
 }
 
+// az űrlap alatti státusz szöveget és színét (success/error osztály) állítja
 function setFormStatus(text, type = "") {
     formStatus.textContent = text
     formStatus.className = type
 }
 
+// a kártya "Szerkesztés" gombja hívja: kiválasztja a terméket és az űrlaphoz görget
 function selectProduct(id) {
     productSelect.value = id
     fillForm(getSelectedProduct())
@@ -147,6 +156,7 @@ function selectProduct(id) {
     editForm.scrollIntoView({ behavior: "smooth" })
 }
 
+// PUT kéréssel elküldi a módosított adatokat a szervernek, majd frissíti a listát
 async function saveProduct(event) {
     event.preventDefault() // ne küldje el a böngésző az űrlapot / ne töltse újra az oldalt
     const product = getSelectedProduct()
@@ -189,8 +199,10 @@ editForm.addEventListener("reset", event => {
     setFormStatus("")
 })
 
+// keresés / kategória váltáskor újrarajzolja a listát
 searchInput.addEventListener("input", render)
 categorySelect.addEventListener("change", render)
 
+// induláskor üres űrlap, majd az adatok betöltése
 fillForm(null)
 loadProducts()

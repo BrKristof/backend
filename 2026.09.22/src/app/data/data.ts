@@ -1,3 +1,4 @@
+// A szerver által használt termékadatok (memóriában élnek, a PUT módosítás újraindításkor elveszik)
 // ide kerül egy adathalmaz, amit a szerver használni fog
 export default [
   {

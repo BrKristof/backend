@@ -1,3 +1,4 @@
+// Egyszerű controller: a GET / kérésre egy "hello world" JSON üzenettel válaszol
 import type { Request, Response } from "express";
 
 export const run = (_reg:Request, res:Response) => {
