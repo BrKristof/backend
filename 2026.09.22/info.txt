@@ -1,2 +1,5 @@
 npm i express
 npm i -D @types/express
+npm i body-parser
+npm i -D body-parser
+npm i -D dotenv

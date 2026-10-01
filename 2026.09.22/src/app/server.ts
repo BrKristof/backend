@@ -1,11 +1,12 @@
-import express from "express";
-import { Request,Response } from "express";
-import path from "path";
-import data from "./data/data.ts"
-const app = express()
+import app from "./app.ts"
+import dotenv from "dotenv"
 
-app.use(express.json())
-// a public mappa fájljait (index.html, front.js) a szerver szolgálja ki: http://localhost:3000/index.html
+dotenv.config()
+
+const PORT = process.env.PORT  || 3001
+
+
+
 app.use(express.static(path.join(__dirname, "public"), { index: false }))
 
 app.get("/", (_req:Request, res:Response) => {
@@ -49,7 +50,14 @@ app.put("/products/:id", (req:Request, res:Response) => {
     res.json(product)
 })
 
-app.listen(3000, () => {
-    console.log("Fut a szerver")
+
+
+app.post("/products", (req:Request, res:Response) => {
+    console.log(req.body)
+    res.send(req.body)
 })
 
+
+app.listen(PORT, () => {
+    console.log( `Fut a szerver a ${PORT} porton`)
+})
