@@ -147,7 +147,7 @@ export class Product implements IProduct {
   }
 }
 
-// product tomb osztaly letrehozasa ami olyan elemekbol epul fel mint a product interface, kiegeszitve fugvenyekkel amik pl kiorolnek hozzaadnak
+// product tomb osztaly letrehozasa ami olyan elemekbol epul fel mint a product interface, kiegeszitve fugvenyekkel amik pl kitorolnek hozzaadnak
 class Products{
 
   // a tárolt termékek listája
@@ -182,7 +182,27 @@ class Products{
   public addMoreThanOneProduct(arr: Product[]){
 
   }
+
+  Object.keys(updatedData).forEach(key => {
+    const propKey = key as keyof IProduct;
+    if(propKey !== 'id' && updatedData[propKey] !== undefined) {
+      (product as any)[propKey] = updatedData[propKey];
+    }
+  })
+
+  // i need to check if when i add an item, one  value of the item is not null undefined or "" and if it is then i return a boolean value of false and if all values are valid then i return true
+  public validateProductData(productData: Partial<IProduct>): boolean {
+    for (const key in productData) {
+      const value = productData[key as keyof IProduct];
+      if (value === null || value === undefined || value === "") {
+        return false;
+      }
+    }
+    return true;
+  }
 }
+
+
 
 /*
 ==================== TALÁLT HIBÁK ====================

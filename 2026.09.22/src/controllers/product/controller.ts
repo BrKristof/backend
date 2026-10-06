@@ -2,6 +2,7 @@
 import type { Request, Response } from "express";
 import data from "../../app/data/data.ts"
 import { Product, type IProduct } from "./product.ts"
+import e = require("express");
 
 
 // GET /product/products -> visszaküldi az összes terméket a data.ts-ből
@@ -16,6 +17,32 @@ export const getProduct = (_req: Request, res: Response) => {
 export const setProduct = (req: Request, res: Response) => {
     const product: Product = new Product(req.body)
     res.send(product.toJSON())
+}
+
+export const getProductbyID = (req: Request, res: Response) => {
+    const id: number = parseInt(req.params.id);
+    const product: Product | undefined = products.getProductbyID(id);
+
+    if (product) {
+        res.send(product);
+    } else {
+        res.status(404).send({ error: "Product not found" });
+    }
+}
+
+export const updateProduct = (req: Request, res: Response) => {
+    const id: number = parseInt(req.params.id);
+    const updatedData: Partial<IProduct> = req.body;
+
+    const product: Product | undefined = products.getProductbyID(id);
+
+    if (product) {
+        // Update the product with the new data
+        Object.assign(product, updatedData);
+        res.send(product);
+    } else {
+        res.status(404).send({ error: "Product not found" });
+    }
 }
 
 
