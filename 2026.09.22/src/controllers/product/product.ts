@@ -1,6 +1,7 @@
 // A termék modell: az IProduct interface (milyen mezői vannak egy terméknek),
 // a Product osztály (egy termék, ellenőrzött setterekkel és üzleti metódusokkal),
 // és a Products osztály (több termék kezelése, még félkész)
+// a datat erdemes betolteni egy valtozoba 
 import data from "../../app/data/data";
 
 // egy termék felépítése (típusa), ugyanazok a mezők, mint a data.ts-ben
@@ -183,12 +184,8 @@ class Products{
 
   }
 
-  Object.keys(updatedData).forEach(key => {
-    const propKey = key as keyof IProduct;
-    if(propKey !== 'id' && updatedData[propKey] !== undefined) {
-      (product as any)[propKey] = updatedData[propKey];
-    }
-  })
+
+
 
   // i need to check if when i add an item, one  value of the item is not null undefined or "" and if it is then i return a boolean value of false and if all values are valid then i return true
   public validateProductData(productData: Partial<IProduct>): boolean {
